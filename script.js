@@ -7,8 +7,6 @@ let spinAngleStart = 10;
 let spinTime = 0;
 let spinTimeTotal = 0;
 let arc = 0;
-let winners = [];
-let numWinners = 0;
 
 function getNames() {
     const numNames = document.getElementById("numNames").value;
@@ -17,7 +15,6 @@ function getNames() {
     // إعادة تعيين القائمة والأسماء
     nameInputsDiv.innerHTML = "";
     names = [];
-    winners = [];
     document.getElementById("winner").innerText = "";
 
     // إنشاء حقول الإدخال للأسماء بناءً على العدد المطلوب
@@ -101,8 +98,8 @@ function stopRotateWheel() {
     ctx.font = 'bold 30px Helvetica, Arial';
     let text = names[index].value;
 
-    // إضافة الفائز للقائمة
-    winners.push(text);
+    // عرض الفائز
+    document.getElementById("winner").innerText = `الفائز: ${text}`;
 
     // تحقق إذا كان يجب حذف الفائز
     if (document.getElementById("removeWinners").checked) {
@@ -112,16 +109,9 @@ function stopRotateWheel() {
 
     ctx.restore();
 
-    // التحقق إذا كان يجب اختيار المزيد من الفائزين
-    if (winners.length < numWinners) {
-        if (names.length > 0) {
-            spin(); // تشغيل الدائرة مرة أخرى لاختيار الفائز التالي
-        }
-    } else {
-        // عرض الفائزين النهائيين
-        document.getElementById("winner").innerText = `الفائزون: ${winners.join(', ')}`;
-        document.getElementById("resetButton").style.display = "block";
-    }
+    // عرض زر "أدر مرة أخرى" وزر "إعادة التسجيل" عند انتهاء الدوران
+    document.getElementById("spinAgainButton").style.display = names.length > 0 ? "block" : "none";
+    document.getElementById("resetButton").style.display = "block";
 }
 
 function easeOut(t, b, c, d) {
@@ -131,16 +121,15 @@ function easeOut(t, b, c, d) {
 }
 
 function spin() {
-    numWinners = parseInt(document.getElementById("numWinners").value);
-    if (numWinners > names.length) {
-        alert("عدد الفائزين أكبر من عدد الأسماء المتاحة.");
+    if (names.length === 0) {
+        alert("الرجاء إدخال الأسماء قبل تشغيل الدائرة.");
         return;
     }
     spinAngleStart = Math.random() * 10 + 10;
     spinTime = 0;
     spinTimeTotal = Math.random() * 3 + 4 * 1000;
-    winners = []; // إعادة تعيين قائمة الفائزين
     document.getElementById("winner").innerText = ""; // تفريغ النتائج السابقة
+    document.getElementById("spinAgainButton").style.display = "none";
     document.getElementById("resetButton").style.display = "none";
     rotateWheel();
 }
@@ -148,10 +137,9 @@ function spin() {
 function resetForm() {
     document.getElementById("numNames").value = "";
     document.getElementById("nameInputs").innerHTML = "";
-    document.getElementById("numWinners").value = "";
     document.getElementById("removeWinners").checked = false;
     document.getElementById("winner").innerText = "";
     names = [];
-    winners = [];
+    document.getElementById("spinAgainButton").style.display = "none";
     document.getElementById("resetButton").style.display = "none";
 }
