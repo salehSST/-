@@ -109,9 +109,8 @@ function stopRotateWheel() {
 
     ctx.restore();
 
-    // عرض زر "أدر مرة أخرى" وزر "إعادة التسجيل" عند انتهاء الدوران
-    document.getElementById("spinAgainButton").style.display = names.length > 0 ? "block" : "none";
-    document.getElementById("resetButton").style.display = "block";
+    // عرض زر "إعادة التسجيل" عند انتهاء الدوران إذا كانت الأسماء قد انتهت
+    document.getElementById("resetButton").style.display = names.length > 0 ? "none" : "block";
 }
 
 function easeOut(t, b, c, d) {
@@ -129,7 +128,6 @@ function spin() {
     spinTime = 0;
     spinTimeTotal = Math.random() * 3 + 4 * 1000;
     document.getElementById("winner").innerText = ""; // تفريغ النتائج السابقة
-    document.getElementById("spinAgainButton").style.display = "none";
     document.getElementById("resetButton").style.display = "none";
     rotateWheel();
 }
@@ -140,6 +138,5 @@ function resetForm() {
     document.getElementById("removeWinners").checked = false;
     document.getElementById("winner").innerText = "";
     names = [];
-    document.getElementById("spinAgainButton").style.display = "none";
     document.getElementById("resetButton").style.display = "none";
 }
