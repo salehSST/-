@@ -28,14 +28,14 @@
             max-width: 90%;
         }
         #winner {
-            font-size: 24px;
+            font-size: 30px;
             font-weight: bold;
             margin: 20px 0;
             color: #333;
         }
-        #spinButton, #resetButton {
+        #spinButton, #spinAgainButton, #resetButton {
             display: block;
-            margin: 20px auto;
+            margin: 10px auto;
             padding: 10px 20px;
             font-size: 18px;
             background-color: #5cb85c;
@@ -44,14 +44,14 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        #resetButton {
-            background-color: #d9534f;
+        #spinAgainButton, #resetButton {
+            background-color: #f0ad4e;
         }
         #spinButton:hover {
             background-color: #4cae4c;
         }
-        #resetButton:hover {
-            background-color: #c9302c;
+        #spinAgainButton:hover, #resetButton:hover {
+            background-color: #ec971f;
         }
         input[type="number"], input[type="text"] {
             font-size: 18px;
@@ -85,17 +85,16 @@
     <div id="nameInputs"></div>
     <button onclick="getNames()">أدخل الأسماء</button><br><br>
 
-    <label for="numWinners">كم عدد الفائزين؟</label>
-    <input type="number" id="numWinners" min="1" placeholder="أدخل عدد الفائزين"><br><br>
-
     <label for="removeWinners">حذف الأسماء الفائزة؟</label>
     <input type="checkbox" id="removeWinners"><br><br>
 
     <div id="winner"></div>
     <canvas id="wheelCanvas" width="500" height="500"></canvas>
     <button id="spinButton" onclick="spin()">شغّل الدائرة</button>
+    <button id="spinAgainButton" onclick="spin()" style="display:none;">أدر مرةً أخرى</button>
     <button id="resetButton" onclick="resetForm()" style="display:none;">إعادة التسجيل</button>
 
     <script src="script.js"></script>
 </body>
 </html>
+
