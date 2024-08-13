@@ -33,7 +33,7 @@
             margin: 20px 0;
             color: #333;
         }
-        #spinButton {
+        #spinButton, #resetButton {
             display: block;
             margin: 20px auto;
             padding: 10px 20px;
@@ -44,8 +44,14 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        #resetButton {
+            background-color: #d9534f;
+        }
         #spinButton:hover {
             background-color: #4cae4c;
+        }
+        #resetButton:hover {
+            background-color: #c9302c;
         }
         input[type="number"], input[type="text"] {
             font-size: 18px;
@@ -88,9 +94,8 @@
     <div id="winner"></div>
     <canvas id="wheelCanvas" width="500" height="500"></canvas>
     <button id="spinButton" onclick="spin()">شغّل الدائرة</button>
+    <button id="resetButton" onclick="resetForm()" style="display:none;">إعادة التسجيل</button>
 
     <script src="script.js"></script>
 </body>
 </html>
-
-
